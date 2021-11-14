@@ -7,9 +7,9 @@
         "./src/*"
       ]
     },
-    "lib": ["ESNext", "dom", "dom.iterable"]
+    "lib": ["ESNext", "dom", "dom.iterable"],
+    "jsx": "preserve"
   },
-
   "include": [
     "src/**/*.vue",
     "src/**/*.ts",
