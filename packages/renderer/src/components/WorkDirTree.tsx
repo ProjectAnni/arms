@@ -1,15 +1,8 @@
-import type {PropType} from 'vue';
 import {defineComponent, ref} from 'vue';
 import type {TreeOption} from 'naive-ui';
 import {NButton, NIcon, NPopover, NTree} from 'naive-ui';
 import type {TreeRenderProps} from 'naive-ui/lib/tree/src/interface';
 import {MusicalNotes, FolderOpen, FolderSharp} from '@vicons/ionicons5/es';
-
-export interface File {
-  name: string;
-  isDir: boolean;
-  children?: File[];
-}
 
 function toTreeOption(f: File, parent = ''): TreeOption {
   const key = parent + '/' + f.name;
@@ -24,14 +17,12 @@ function toTreeOption(f: File, parent = ''): TreeOption {
 export default defineComponent({
   name: 'WorkDirTree',
   props: {
-    dir: {
-      type: Object as PropType<File[]>,
+    path: {
+      type: String,
       required: true,
     },
   },
   setup(props) {
-    const r: TreeOption[] = props.dir.map(d => toTreeOption(d));
-
     const xRef = ref(0);
     const yRef = ref(0);
     const showContextMenu = ref(false);
@@ -60,18 +51,25 @@ export default defineComponent({
       );
     }
 
+    const expandedKeysRef = ref<(string | number)[]>([]);
+
+    const dataRef = ref(window.anni.scanFolderSync(props.path).map(d => toTreeOption(d, props.path)));
     return () =>
       <div style={{height: '100%'}}>
         <NTree
           selectable={false}
           blockNode
-          blockLine
-          data={r}
+          remote
+          expandedKeys={expandedKeysRef.value}
+          onUpdateExpandedKeys={(keys) => expandedKeysRef.value = keys}
+          data={dataRef.value}
+          onLoad={async (node) => {
+            const result = await window.anni.scanFolder(node.key);
+            node.children = result.map(d => toTreeOption(d, node.key as string));
+          }}
           renderPrefix={renderPrefix}
           renderLabel={renderLabel}
-          onUpdateSelectedKeys={(keys) => {
-            console.log(keys);
-          }}
+          virtualScroll
         />
         <NPopover
           showArrow={false}
@@ -94,7 +92,7 @@ export default defineComponent({
             onClick={() => {
               hideContextMenu();
             }}>
-            写入元数据
+            Write metadata
           </NButton>
         </NPopover>
       </div>;

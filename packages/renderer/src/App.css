@@ -1,3 +1,12 @@
+html, body, #app {
+  height: 100%;
+  max-height: 100%;
+}
+
 [v-placement="right-start"] > .n-popover {
   margin-left: 0;
+}
+
+.n-tree .n-tree-node-wrapper {
+  padding: 0;
 }
