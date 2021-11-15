@@ -2,7 +2,6 @@ import {app, BrowserWindow, shell} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 
-
 const isSingleInstance = app.requestSingleInstanceLock();
 
 if (!isSingleInstance) {
@@ -54,9 +53,9 @@ const createWindow = async () => {
    *
    * @see https://stackoverflow.com/a/67409223
    */
-   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+  mainWindow.webContents.setWindowOpenHandler(({url}) => {
     shell.openExternal(url);
-    return { action: 'deny' };
+    return {action: 'deny'};
   });
 
   /**

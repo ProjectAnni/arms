@@ -5,6 +5,7 @@ import {join} from 'path';
 import {builtinModules} from 'module';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import monacoEditorPlugin from 'vite-plugin-monaco-editor';
 
 const PACKAGE_ROOT = __dirname;
 
@@ -20,7 +21,7 @@ const config = {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
     },
   },
-  plugins: [vue(), vueJsx()],
+  plugins: [vue(), vueJsx(), monacoEditorPlugin({languageWorkers: ['editorWorkerService']})],
   base: '',
   server: {
     fs: {

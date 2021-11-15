@@ -48,7 +48,11 @@
      * Just for beauty
      */
     "quotes": [
-      "warn", "single"
+      "warn",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
     ]
   }
 }

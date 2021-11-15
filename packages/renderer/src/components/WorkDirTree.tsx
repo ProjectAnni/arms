@@ -4,7 +4,7 @@ import {NButton, NIcon, NPopover, NTree} from 'naive-ui';
 import type {TreeRenderProps} from 'naive-ui/lib/tree/src/interface';
 import {MusicalNotes, FolderOpen, FolderSharp} from '@vicons/ionicons5/es';
 
-function toTreeOption(f: File, parent = ''): TreeOption {
+function toTreeOption(f: ArmsFile, parent = ''): TreeOption {
   const key = parent + '/' + f.name;
   return {
     label: f.name,
@@ -64,7 +64,7 @@ export default defineComponent({
           onUpdateExpandedKeys={(keys) => expandedKeysRef.value = keys}
           data={dataRef.value}
           onLoad={async (node) => {
-            const result = await window.anni.scanFolder(node.key);
+            const result = await window.anni.scanFolder(node.key as string);
             node.children = result.map(d => toTreeOption(d, node.key as string));
           }}
           renderPrefix={renderPrefix}

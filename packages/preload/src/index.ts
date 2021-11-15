@@ -1,8 +1,9 @@
 import {contextBridge} from 'electron';
 import {readdir} from 'fs/promises';
 import {readdirSync} from 'fs';
+import {getAnniVersion} from '/@/utils/environment';
+import onigasmUrl from 'onigasm/lib/onigasm.wasm?url';
 
-const apiKey = 'electron';
 /**
  * @see https://github.com/electron/electron/issues/21437#issuecomment-573522360
  */
@@ -16,9 +17,9 @@ const api: ElectronApi = {
  *
  * @see https://www.electronjs.org/docs/api/context-bridge
  */
-contextBridge.exposeInMainWorld(apiKey, api);
+contextBridge.exposeInMainWorld('electron', api);
 
-contextBridge.exposeInMainWorld('anni', {
+const anniExposed: AnniApi = {
   async scanFolder(path: string) {
     const dir = await readdir(path, {withFileTypes: true});
     return dir.filter(n => !n.name.startsWith('.')).map((file) => {
@@ -38,4 +39,10 @@ contextBridge.exposeInMainWorld('anni', {
       };
     });
   },
-});
+
+  version: getAnniVersion(),
+
+  onigasmUrl: onigasmUrl,
+};
+
+contextBridge.exposeInMainWorld('anni', anniExposed);

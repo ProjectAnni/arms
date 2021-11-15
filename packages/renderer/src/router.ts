@@ -1,8 +1,8 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
-import Home from '/@/components/Home.vue';
+import ArmsEditor from '/@/components/ArmsEditor';
 
 const routes = [
-  {path: '/', name: 'Home', component: Home},
+  {path: '/', name: 'Home', component: ArmsEditor},
 ];
 
 export default createRouter({

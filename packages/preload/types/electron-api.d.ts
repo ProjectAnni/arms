@@ -3,15 +3,19 @@ interface ElectronApi {
 }
 
 interface AnniApi {
-  scanFolder(string): Promise<File[]>;
+  scanFolder(base: string): Promise<ArmsFile[]>;
 
-  scanFolderSync(string): File[];
+  scanFolderSync(base: string): ArmsFile[];
+
+  version: Promise<string | undefined>;
+
+  onigasmUrl: string;
 }
 
-interface File {
+interface ArmsFile {
   name: string;
   isDir: boolean;
-  children?: File[];
+  children?: ArmsFile[];
 }
 
 declare interface Window {
