@@ -27,7 +27,7 @@
     "pre-push": "yarn typecheck"
   },
   "lint-staged": {
-    "*.{js,ts,vue}": "eslint --cache --fix"
+    "*.{js,ts,tsx,vue}": "eslint --cache --fix"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "2.2.0",

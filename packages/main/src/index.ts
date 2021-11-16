@@ -2,6 +2,8 @@ import {app, BrowserWindow, shell} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 
+import registerFormatIPC from '/@/ipc/format';
+
 const isSingleInstance = app.requestSingleInstanceLock();
 
 if (!isSingleInstance) {
@@ -68,6 +70,7 @@ const createWindow = async () => {
     : new URL('../renderer/dist/index.html', 'file://' + __dirname).toString();
 
 
+  registerFormatIPC();
   await mainWindow.loadURL(pageUrl);
 };
 

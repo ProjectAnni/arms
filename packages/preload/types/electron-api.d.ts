@@ -10,6 +10,8 @@ interface AnniApi {
   version: Promise<string | undefined>;
 
   onigasmUrl: string;
+
+  formatTOML(input: string): Promise<string>;
 }
 
 interface ArmsFile {

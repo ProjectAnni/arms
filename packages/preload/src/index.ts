@@ -3,6 +3,7 @@ import {readdir} from 'fs/promises';
 import {readdirSync} from 'fs';
 import {getAnniVersion} from '/@/utils/environment';
 import onigasmUrl from 'onigasm/lib/onigasm.wasm?url';
+import {formatTOML} from '/@/utils/format';
 
 /**
  * @see https://github.com/electron/electron/issues/21437#issuecomment-573522360
@@ -43,6 +44,8 @@ const anniExposed: AnniApi = {
   version: getAnniVersion(),
 
   onigasmUrl: onigasmUrl,
+
+  formatTOML,
 };
 
 contextBridge.exposeInMainWorld('anni', anniExposed);

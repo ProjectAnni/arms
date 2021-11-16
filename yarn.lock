@@ -1497,7 +1497,6 @@ __metadata:
     monaco-textmate: ^3.0.1
     naive-ui: ^2.20.2
     onigasm: ^2.2.5
-    oniguruma: ^7.2.3
     playwright: 1.16.3
     prettier: ^2.4.1
     prettier-plugin-toml: ^0.3.1
@@ -4814,15 +4813,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.14.0":
-  version: 2.15.0
-  resolution: "nan@npm:2.15.0"
-  dependencies:
-    node-gyp: latest
-  checksum: 33e1bb4dfca447fe37d4bb5889be55de154828632c8d38646db67293a21afd61ed9909cdf1b886214a64707d935926c4e60e2b09de9edfc2ad58de31d6ce8f39
-  languageName: node
-  linkType: hard
-
 "nanoid@npm:^3.1.30":
   version: 3.1.30
   resolution: "nanoid@npm:3.1.30"
@@ -4983,16 +4973,6 @@ __metadata:
   dependencies:
     lru-cache: ^5.1.1
   checksum: 97aedde610ef561f05853609d6a5b720ec1e123f867bdac1b38b5aeb3bc90ed60209678c75a5f0f9821aa793c720b6d17aabfb956e26ab115ee9b81d6e56bdf7
-  languageName: node
-  linkType: hard
-
-"oniguruma@npm:^7.2.3":
-  version: 7.2.3
-  resolution: "oniguruma@npm:7.2.3"
-  dependencies:
-    nan: ^2.14.0
-    node-gyp: latest
-  checksum: 97e35c69bdced4c2adaad0b1e363bd328da807c8d4a1e866253a7d9797d21e88785655a3c825c5bccff7dab2e2a2ac107ee9d2127ff288fb21f9b6711c1c86e9
   languageName: node
   linkType: hard
 

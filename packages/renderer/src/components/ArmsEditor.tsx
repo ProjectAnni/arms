@@ -18,6 +18,7 @@ export default defineComponent({
     const data = ref('');
 
     onMounted(async () => {
+      console.log('mounted');
       try {
         await loadWASM(anni.onigasmUrl);
         // eslint-disable-next-line no-empty
@@ -35,7 +36,7 @@ export default defineComponent({
       const grammars: Map<string, string> = new Map([['toml', 'source.toml']]);
       monaco.editor.defineTheme('theme-github', {base: 'vs', ...githubTheme});
 
-      editor.value = await monaco.editor.create(div.value as HTMLElement, {
+      const instance = await monaco.editor.create(div.value as HTMLElement, {
         language: 'toml',
         theme: 'theme-github',
         automaticLayout: true,
@@ -43,21 +44,33 @@ export default defineComponent({
         value: data.value,
       });
       monaco.languages.register({id: 'toml'});
-      await wireTmGrammars(monaco, registry, grammars, editor.value);
-      div.value = editor.value.getDomNode() as HTMLElement;
+      await wireTmGrammars(monaco, registry, grammars, instance);
+      editor.value = instance;
 
       // listen change event
-      editor.value?.onDidChangeModelContent(() => {
-        const value = editor.value?.getValue() || '';
-        if (data.value !== value) {
-          data.value = editor.value?.getValue() || '';
-          ctx.emit('onChange', data.value);
+      instance.onDidChangeModelContent(() => {
+        const value = instance.getValue();
+        if (value !== data.value) {
+          data.value = value;
+          ctx.emit('onChange', value);
         }
+      });
+
+      instance.addAction({
+        id: 'toml-format',
+        label: 'Format TOML',
+        keybindings: [
+          monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
+        ],
+        run: async (ed) => {
+          data.value = await anni.formatTOML(data.value);
+          ed.setValue(data.value);
+        },
       });
     });
 
     onUnmounted(() => {
-      editor.value?.dispose();
+      // editor.value?.dispose();
     });
 
     const style = {width: '100%', height: '100%'};
