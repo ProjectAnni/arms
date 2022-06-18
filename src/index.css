@@ -1,0 +1,12 @@
+@import "modern-normalize/modern-normalize.css";
+@import "@blueprintjs/core/lib/css/blueprint.css";
+@import "allotment/dist/style.css";
+/* @import "@fontsource/jetbrains-mono/index.css"; */
+/* @import "@blueprintjs/icons/lib/css/blueprint-icons.css"; */
+
+html,
+body,
+#root {
+    height: 100%;
+    width: 100%;
+}

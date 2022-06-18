@@ -1,19 +1,27 @@
 {
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "pnpm build",
+    "beforeDevCommand": "pnpm dev",
+    "devPath": "http://localhost:3000",
+    "distDir": "../dist"
+  },
   "package": {
     "productName": "arms",
     "version": "0.1.0"
   },
-  "build": {
-    "distDir": "../dist",
-    "devPath": "http://localhost:3001",
-    "beforeDevCommand": "yarn dev",
-    "beforeBuildCommand": "yarn build"
-  },
   "tauri": {
+    "allowlist": {
+      "all": true
+    },
     "bundle": {
       "active": true,
-      "targets": "all",
-      "identifier": "rs.anni.arms",
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -21,47 +29,38 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "resources": [],
-      "externalBin": [],
-      "copyright": "",
-      "category": "DeveloperTool",
-      "shortDescription": "",
+      "identifier": "com.tauri.dev",
       "longDescription": "",
-      "deb": {
-        "depends": [],
-        "useBootstrapper": false
-      },
       "macOS": {
-        "frameworks": [],
-        "minimumSystemVersion": "",
-        "useBootstrapper": false,
+        "entitlements": null,
         "exceptionDomain": "",
-        "signingIdentity": null,
-        "entitlements": null
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
       },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
         "timestampUrl": ""
       }
     },
+    "security": {
+      "csp": null
+    },
     "updater": {
       "active": false
     },
-    "allowlist": {
-      "all": true
-    },
     "windows": [
       {
-        "title": "ARMS",
-        "width": 1280,
+        "fullscreen": false,
         "height": 720,
         "resizable": true,
-        "fullscreen": false
+        "title": "ARMS",
+        "width": 1280
       }
-    ],
-    "security": {
-      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
-    }
+    ]
   }
 }
