@@ -1,8 +1,8 @@
 import { Allotment } from 'allotment'
 import Editor from './components/Editor'
+import FileTree from './components/FileTree'
 import Terminal from './components/Terminal'
 import ToolBar from './components/ToolBar'
-import WorkingPanel from './components/WorkingPanel'
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
               </Allotment.Pane>
               {/* file browser(right) */}
               <Allotment.Pane preferredSize="25%">
-                <WorkingPanel />
+                <FileTree />
               </Allotment.Pane>
             </Allotment>
           </Allotment.Pane>

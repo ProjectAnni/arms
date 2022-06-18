@@ -4,7 +4,10 @@ import * as monaco from "monaco-editor"
 export default function Editor() {
     const ref = useRef(null!);
     useEffect(() => {
-        const editor = monaco.editor.create(ref.current, { automaticLayout: true })
+        const editor = monaco.editor.create(ref.current, {
+            automaticLayout: true,
+            minimap: { enabled: false }
+        })
 
         return () => {
             editor.dispose()
